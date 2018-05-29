@@ -2,6 +2,8 @@
 
 A simple python Flask application that provides a list of items within a variety of categories as well as provide a user registration and authentication system using OAuth 2.0 providers: google and facebook. 
 Registered users have the ability to post, edit and delete their own items.
+the application provides a JSON endpoint to that list all the categories and items
+
 
 # Requirements And Dependencies
 
@@ -38,3 +40,4 @@ add your client id to login.html template (search for the placeholder {{YOUR-CLI
  `python project.py` 
 ```
 - Browse the application from the link: http://localhost:5000 
+- JSON end point: http://localhost:5000/catalog.json 
