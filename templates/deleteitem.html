@@ -1,0 +1,19 @@
+<!-- settting the head title vatiable --> 
+{% set headTitle = 'Delete An Item' %}
+<!-- including the header -->
+{% include 'sections/header.html' %}
+  <!-- main section --> 
+	<div class="container bg-white mt-5 py-4 px-4">
+		<div class="row">
+			<div class="col text-center">
+				<p class="mb-5 h3 alert alert-warning">Are you sure you want to delete the item <strong> " {{ item.name }} " </strong> from the category <strong> " {{ item.category.name }} "</strong></p>
+	
+				<form action="" method='POST'>
+  				<button type="submit" class="btn btn-danger">Delete</button>
+				</form>
+				<a href="{{ url_for('showItems', cat_title = item.category.name)}}"><button class="mt-3 btn-lg btn btn-primary btn-large">Cancel</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% include 'sections/footer.html' %}

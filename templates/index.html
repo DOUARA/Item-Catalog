@@ -1,0 +1,47 @@
+<!-- settting the head title vatiable --> 
+{% set headTitle = 'Home' %}
+<!-- including the header -->
+{% include 'sections/header.html' %}
+<!-- main section --> 
+	<div class="container bg-white mt-5 py-4 px-4">
+		<!-- Flash Messages -->
+		{% with messages = get_flashed_messages() %}
+		      {% if messages %}
+		      {% for message in messages %}
+			<div class ='alert alert-success flash' role="alert">
+		        {{ message }}
+		        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			  {% endfor %}
+			  {% endif %}
+		      {% endwith %}
+		<div class="row">
+			<div class="col-sm-4">
+				<h1 class='mb-3 mt-3'>Categories</h1>
+				<div class="list-group">
+				{% for category in categories %}
+				  <a href="{{ url_for('showItems', cat_title = category.name ) }}" class="list-group-item list-group-item-action">
+				    {{ category[0] }}
+				    <span class="badge badge-primary badge-pill">
+					{{category[1]}}
+				    </span>
+				    {% endfor %}
+				  </a>
+				</div>
+			</div>
+			<div class="col-md">
+				<h1 class='mb-3 mt-3'>Latest Items</h1>
+				<ul class="list-group list-group-flush">
+					{% for item in items %}
+  					<li class="list-group-item"><a href="{{ url_for('showItemInfo', cat_title = item.category.name, item_title = item.name ) }}">
+  					{{ item.name }}</a><span class="text-secondary font-italic small"> ({{item.category.name }})</span>
+  					</li>
+  					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+{% include 'sections/footer.html' %}
+

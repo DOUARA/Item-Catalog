@@ -1,0 +1,52 @@
+<!-- settting the head title vatiable --> 
+{% set headTitle = category.name %}
+<!-- including the header -->
+{% include 'sections/header.html' %}
+	<div class="container bg-white mt-5 py-4 px-4">
+		<!-- Flash Messages -->
+		{% with messages = get_flashed_messages() %}
+		      {% if messages %}
+		      {% for message in messages %}
+			<div class ='alert alert-success flash' role="alert">
+		        {{ message }}
+		        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			  {% endfor %}
+			  {% endif %}
+		      {% endwith %}
+		<div class="row">
+			<div class="col-sm-4">
+				<h1 class='mb-3 mt-3'>Categories</h1>
+				<div class="list-group">
+				{% for ele in categories %}
+				  <a href="{{ url_for('showItems', cat_title = ele.name ) }}" class="list-group-item list-group-item-action {% if ele[0] == category.name %} active {% endif %} ">
+				    {{ ele.name }}
+				    <span class="badge badge-dark badge-pill">
+					{{ele[1]}}
+				    </span>
+				    {% endfor %}
+				  </a>
+				</div>
+			</div>
+			<div class="col-md">
+				<h1 class='mb-3 mt-3'>{{ category.name }}</h1>
+				<ul class="list-group list-group-flush">
+					{% for item in items %}
+  					<li class="list-group-item"><a href="{{ url_for('showItemInfo', cat_title = item.category.name, item_title = item.name ) }}">
+  					{{ item.name }}</a>
+  					{% if user_id == item.user_id %}
+					<p class="small">
+					<a href="{{ url_for('editItem', cat_title = item.category.name, item_title = item.name ) }}" class=
+					"text-secondary">Edit</a>
+				    <a href="{{ url_for('deleteItem', cat_title = item.category.name, item_title = item.name ) }}" class=" text-secondary">Delete</a>
+					</p>	
+  					{% endif %}
+  					</li>
+  					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+{% include 'sections/footer.html' %}

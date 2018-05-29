@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ headTitle }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="/static/images/favicon.png">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body class='bg-dark'>
+  <!-- Header Section --> 
+  <header class="container-fluid header">
+	<div class="container">
+		<div class="row">
+         <div class="col-lg-4 py-4">
+           <a href="/"><img src="/static/images/logo.png" alt="logo" class='logo-image'><h1 class="text-white logo-title">Item<span class="text-warning">Catalog</span></h1></a>
+         </div>
+         {% if 'username' not in login_session %}
+         <div class="col-lg-8 col-md text-sm-right py-4"> 
+           <a href="{{ url_for('showLogin') }}"><button class="btn btn-primary btn-lg">Login</button></a>
+         </div>
+          {% endif %} 
+          {% if 'username' in login_session %}
+          <div class="col-lg-5 col-md text-sm-right py-4"> 
+          <img src="{{ login_session['picture'] }}" alt="profile_pic" class='header_profile_pic mr-2'>
+          <span class="text-white">You are logged in as: <span class="text-primary"> {{ login_session['username'] }} </span></span>
+         </div>
+         <div class="col-lg-3 col-md text-sm-right py-4"> 
+          <a href=" {{ url_for('addNewItem') }} "><button class="btn btn-primary btn-lg ml-3"> New Item</button></a> 
+           <a href=" {{ url_for('disconnect') }} "><button class="btn btn-warning btn-lg ml-3">  Logout</button></a>
+           {% endif %}
+         </div>
+         </div>
+        </div>
+    </div>    
+  </header>

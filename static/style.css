@@ -1,0 +1,22 @@
+.header {
+	background: #001f3f;
+}
+.header_profile_pic {
+	width:50px;
+	height:50px;
+	border-radius:50%;
+}
+.logo-image {
+	width:50px;
+	height:50px;
+}
+.logo-title {
+	display:inline;
+}
+.profile_pic_onLogin {
+	width:180px;
+	height:180px;
+	margin:10px;
+	border-radius:50%;
+	margin:auto;
+}

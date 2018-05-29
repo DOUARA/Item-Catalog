@@ -1,0 +1,34 @@
+<!-- settting the head title vatiable --> 
+{% set headTitle = item.name %}
+<!-- including the header -->
+{% include 'sections/header.html' %}
+  <!-- main section --> 
+	<div class="container bg-white mt-5 py-4 px-4">
+		<!-- Flash Messages -->
+		{% with messages = get_flashed_messages() %}
+		      {% if messages %}
+		      {% for message in messages %}
+			<div class ='alert alert-success flash' role="alert">
+		        {{ message }}
+		        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			  {% endfor %}
+			  {% endif %}
+		      {% endwith %}
+		<div class="row">
+			<div class="col">
+				<h1 class='mb-3 mt-3'>{{ item.name }}</h1>
+				 <p>
+				 	{{ item.description }}
+				 </p>
+				  <a href="{{ url_for('editItem', cat_title = item.category.name, item_title = item.name ) }}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</button></a>
+				  <a href="{{ url_for('deleteItem', cat_title = item.category.name, item_title = item.name ) }}"><button type="button" class="btn btn-warning"><i class="fa fa-trash" aria-hidden="true"></i>Delete</button></a><br><br>
+				  Go back to: <a href="/">Home</a> |  <a href="{{ url_for('showItems', cat_title = item.category.name) }}">{{ item.category.name }}</a>
+				</div>
+			</a>
+			</div>
+		</div>
+	</div>
+{% include 'sections/footer.html' %}

@@ -1,0 +1,174 @@
+<!-- settting the head title vatiable --> 
+{% set headTitle = "Login" %}
+<!-- including the header -->
+{% include 'sections/header.html' %}
+  <!-- main section --> 
+	<div class="container bg-white mt-5 py-4 px-4">
+		<div class="row">
+			<div class="col text-center">
+				<h1 class='mb-3 mt-3'>Login</h1>
+				 <h4 id="guidance" class='text-secondary'>
+				 	Please, chose one of the two ways below to login: 
+				 </h4>
+				  <!-- Google Sign In Button --> 
+				  <div id="signinButton" class="my-4">
+                <span class="g-signin"
+                  data-scope="openid email"
+                  data-clientid="{{YOUR-CLIENT-ID}}"
+                  data-redirecturi="postmessage"
+                  data-accesstype="offline"
+                  data-cookiepolicy="single_host_origin"
+                  data-callback="signInCallback"
+                  data-approvalprompt="">
+                </span>
+			      </div>           
+			       <!-- Facebook Sign in Button -->
+            <button id="fbLoginButton">
+            <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+            <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+            </fb:login-button> </button>
+            <div id="result"></div>
+			</div>
+		</div>
+
+	</div>
+
+
+<!-- FACEBOOK SIGN IN --> 
+
+<script>
+    // Load the SDK asynchronously
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '2057943847793728',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{latest-api-version}'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+    // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function sendTokenToServer() {
+    var access_token = FB.getAuthResponse()['accessToken'];
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+     $.ajax({
+      type: 'POST',
+      url: '/fbconnect?state={{STATE}}',
+      processData: false,
+      data: access_token,
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+         setTimeout(function() {
+          window.location.href = "/";
+         }, 4000);
+          
+      } else {
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+         }
+      }
+      
+  });
+    });
+  }
+
+  // Facebook SDK
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '192898217974956',
+    cookie     : true,  // enable cookies to allow the server to access
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.8' // use version 2.8
+  });
+  };
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function sendTokenToServer() {
+    var access_token = FB.getAuthResponse()['accessToken'];
+    
+    FB.api('/me', function(response) {
+      $('#signinButton').attr('style', 'display: none');
+       $('#fbLoginButton').attr('style', 'display: none');
+       $('#guidance').attr('style', 'display: none');
+     $.ajax({
+      type: 'POST',
+      url: '/fbconnect?state={{STATE}}',
+      processData: false,
+      data: access_token,
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+
+
+          $('#result').html('<div class="alert alert-success flash">Login Successful!</div>'+ result + '<br><span class="h3">Redirecting...</span>')
+         setTimeout(function() {
+          window.location.href = "/";
+         }, 4000);
+      } else {
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+         }
+      }
+  });
+    });
+  }
+
+// Google Login callBack function 
+function signInCallback(authResult) {
+  if (authResult['code']) {
+    // Hide the sign-in button now that the user is authorized
+    $('#signinButton').attr('style', 'display: none');
+    $('#fbLoginButton').attr('style', 'display: none');
+    $('#guidance').attr('style', 'display: none');
+    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the HOME  page
+    $.ajax({
+      type: 'POST',
+      url: '/gconnect?state={{STATE}}',
+      processData: false,
+      data: authResult['code'],
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+          $('#result').html('<div class ="alert alert-success">Login Successful!</div>'+ result + '<br><span class="h3">Redirecting...</span>')
+         setTimeout(function() {
+          window.location.href = "/";
+         }, 3000);
+          
+      } else if (authResult['error']) {
+    console.log('There was an error: ' + authResult['error']);
+  } else {
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+         }
+      }
+      
+  }); } }
+</script>
+<script src="//apis.google.com/js/platform.js?onload=start"> </script>
+
+{% include 'sections/footer.html' %}
