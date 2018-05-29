@@ -9,7 +9,7 @@ Registered users have the ability to post, edit and delete their own items.
 - [SQLAlchemy ORM](http://docs.sqlalchemy.org/en/latest/intro.html)
 - [Flask Framework.](http://flask.pocoo.org/docs/1.0/installation/)
 - SQLite3
-- You Need to have a [facebook](https://developers.facebook.com/docs/apps/register/] and [google](https://console.developers.google.com/flows/enableapi?apiid=fitness) developer apps in order to use the Authentication System
+- You Need to have a [facebook](https://developers.facebook.com/docs/apps/register/) and [google](https://console.developers.google.com/flows/enableapi?apiid=fitness) developer apps in order to use the Authentication System
 
 # Files and structure
 - Server side code: project.py
@@ -37,4 +37,4 @@ add your client id to login.html template (search for the placeholder {{YOUR-CLI
 ```
  `python project.py` 
 ```
-- Browse the application from the link below: http://localhost:5000 
+- Browse the application from the link: http://localhost:5000 
