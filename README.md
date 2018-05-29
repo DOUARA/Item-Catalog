@@ -13,7 +13,7 @@ the application provides a JSON endpoint to that list all the categories and ite
 - SQLite3
 - You Need to have a [facebook](https://developers.facebook.com/docs/apps/register/) and [google](https://console.developers.google.com/flows/enableapi?apiid=fitness) developer apps in order to use the Authentication System
 
-# Files and structure
+# Files and Structure
 - Server side code: project.py
 - Database: database_configuration.py
 - Templates reside on template folder
