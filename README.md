@@ -24,7 +24,7 @@ Clone the repository to your machine:
 ```
   https://github.com/DOUARA/Item-Catalog.git item-catalog
 ```
-- Facebook Authentication: Add your facebook id and facebook secret to the file named: fb_client_secrets.json, then authorise the redirect to the link below from your app dashboard:  
+- Facebook Authentication: Add your facebook cliend_id and client_secret to the file named: fb_client_secrets.json, then authorise the redirect to the link below from your app dashboard:  
            http://localhost:5000
 
  - Google Authentication: authorise the redirect to the following links from within your app dashboard: 
