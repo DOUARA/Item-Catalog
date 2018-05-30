@@ -28,7 +28,7 @@ Clone the repository to your machine:
            http://localhost:5000
 
  - Google Authentication: authorise the redirect to the following links from within your app dashboard: 
-           http://localhost:5000/login
+           http://localhost:5000/login, 
            http://localhost:5000/gconnect
 and add the link:    http://localhost:5000 to  the Authorized JavaScript origins.
 
