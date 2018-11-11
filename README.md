@@ -41,3 +41,6 @@ add your client id to login.html template (search for the placeholder {{YOUR-CLI
 ```
 - Browse the application from the link: http://localhost:5000 
 - JSON end point: http://localhost:5000/catalog.json 
+
+# Live preview
+https://item-catalog.douara.me/
